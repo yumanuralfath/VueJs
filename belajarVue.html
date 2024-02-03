@@ -3,10 +3,37 @@
 <div id="app">
   <h1>Biodata Pesera</h1>
   <form action="">
-    <label>Nama Lengkap </label>
-
+    <label>Nama Lengkap </label><br />
+    <input type="text" v-model="name" /> <br />
     <br />
+    <label>Usia</label> <br />
+    <br />
+    <input type="number" v-model="age" /> <br />
+    <br />
+    <label>Kota Kelahiran</label> <br />
+    <br />
+    <select v-model="city">
+      <option value="1">Pekanbaru</option>
+      <option value="2">Padang</option>
+      <option value="3">Pesisir Selatan</option>
+      <option value="4">Jakarta</option>
+    </select>
+    <br />
+    <br />
+    <label>Jenis Kelamin</label>
+    <input type="radio" v-model="gender" value="1" /> male <br />
+    <input type="radio" v-model="gender" value="2" /> female <br />
+    <br />
+    <label>Alamat</label> <br />
+    <textarea cols="30" rows="10"></textarea>
+    <br />
+
+    <input type="submit" value="kirim" />
   </form>
+
+  <br />
+
+  <p>Nama saya adalah {{name}}</p>
 </div>
 
 <script>
@@ -14,9 +41,9 @@
 
   createApp({
     setup() {
-      const message = ref("Hello vue!");
+      const name = ref("");
       return {
-        message,
+        name,
       };
     },
   }).mount("#app");
