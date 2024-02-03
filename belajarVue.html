@@ -1,16 +1,23 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-<div id="app">{{ message }}</div>
+<div id="app">
+  <h1>Biodata Pesera</h1>
+  <form action="">
+    <label>Nama Lengkap </label>
+
+    <br />
+  </form>
+</div>
 
 <script>
-  const { createApp, ref } = Vue
+  const { createApp, ref } = Vue;
 
   createApp({
     setup() {
-      const message = ref('Hello vue!')
+      const message = ref("Hello vue!");
       return {
-        message
-      }
-    }
-  }).mount('#app')
+        message,
+      };
+    },
+  }).mount("#app");
 </script>
