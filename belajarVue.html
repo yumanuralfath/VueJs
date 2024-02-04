@@ -2,17 +2,17 @@
 
 <div id="app">
   <h1>Biodata Pesera</h1>
-  <form action="">
+  <form @submit.prevent="onSubmit">
     <label>Nama Lengkap </label><br />
-    <input type="text" v-model="name" /> <br />
+    <input type="text" v-model="data.name" /> <br />
     <br />
     <label>Usia</label> <br />
-    <br />
-    <input type="number" v-model="age" /> <br />
+
+    <input type="number" v-model="data.age" /> <br />
     <br />
     <label>Kota Kelahiran</label> <br />
-    <br />
-    <select v-model="city">
+
+    <select v-model="data.city">
       <option value="1">Pekanbaru</option>
       <option value="2">Padang</option>
       <option value="3">Pesisir Selatan</option>
@@ -20,31 +20,61 @@
     </select>
     <br />
     <br />
-    <label>Jenis Kelamin</label>
-    <input type="radio" v-model="gender" value="1" /> male <br />
-    <input type="radio" v-model="gender" value="2" /> female <br />
+    <label>Jenis Kelamin</label> <br />
+    <input type="radio" v-model="data.gender" value="1" /> Laki - laki
+    <input type="radio" v-model="data.gender" value="2" /> Perempuan <br />
     <br />
     <label>Alamat</label> <br />
-    <textarea cols="30" rows="10"></textarea>
+    <textarea v-model="data.address" cols="30" rows="10"></textarea>
     <br />
 
     <input type="submit" value="kirim" />
   </form>
 
-  <br />
-
-  <p>Nama saya adalah {{name}}</p>
-  <p>Umur saya sekarang {{age}} tahun</p>
+  <hr />
+  <button type="button" @click="output = !output">
+    {{output ? "Hide" : "Show" }} Output
+  </button>
+  <div v-show="output">
+    <p>Nama saya {{data.name}}</p>
+    <p>Umur saya sekarang {{data.age}} tahun</p>
+    <p>
+      Kota kelahiran saya di {{data.city == 1 ? "Pekanbaru" : data.city == 2 ?
+      "Padang" : data.city == 3 ? "Pesisir Selatan" : data.city == 4 ? "Jakarta"
+      : " " }}
+    </p>
+    <p v-if="data.gender == 1">Saya seorang Laki - laki</p>
+    <p v-else-if="data.gender == 2">Saya seorang Perempuan</p>
+    <p v-else>Saya Seorang</p>
+    <p>Saya beralamat di {{data.address}}</p>
+  </div>
 </div>
 
 <script>
-  const { createApp, ref } = Vue;
+  const { createApp, ref, reactive } = Vue;
 
   createApp({
     setup() {
-      const name = ref("");
+      const data = reactive({
+        name: "",
+        age: "",
+        gender: "",
+        address: "",
+      });
+
+      const output = ref(false);
+      const dataArray = ref([]);
+
+      const onSubmit = () => {
+        dataArray.value = data;
+        console.log(dataArray.value);
+      };
+
       return {
-        name,
+        data,
+        output,
+        dataArray,
+        onSubmit,
       };
     },
   }).mount("#app");
